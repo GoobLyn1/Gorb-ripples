@@ -13,13 +13,14 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             512./(555.+randBases[8*i+3]-.5), 
             512./(660.+randBases[8*i+4]-.5)
             );
+        vec2 c0fr
         vec2 centerO = vec2(
-            0.5 + 0.2 * sin(iTime*(sin(iTime/1118.)+float(i+1)*randBases[8*i])),
+            0.5 + 0.2 * sin(iTime*),
             0.5 +       cos(iTime*(float(i+1)*randBases[8+i+1]))/8.
         );
         float time = iTime-iTimeDelta*distance(uv,centerO)*64.;
         vec2 center = vec2(
-            0.5 + 0.2 * sin(time*(sin(time/1118.)+float(i+1)*randBases[8*i])), 
+            0.5 + 0.2 * sin(time*(sin(iTime/8.)+float(i+1)*randBases[8*i])), 
             0.5 +       cos(time*(float(i+1)*randBases[8+i+1]))/8.
         );
         vec2 point = (uv - center) * vec2(iResolution.x/iResolution.y, 1.0);
