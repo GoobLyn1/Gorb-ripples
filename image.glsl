@@ -8,10 +8,14 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3[3] q=vec3[3](vec3(0.),vec3(0.),vec3(0.));
     vec2 uv = fragCoord / iResolution.xy;
     for (int i = 0; i < 2; i++) {
-        vec2 center = vec2(0.5 + 0.2 * sin(iTime)*float(i), cos(iTime)*float(i)/8.+.5);
+        vec2 center = vec2(0.5 + 0.2 * sin(iTime)*float(i+1), cos(iTime)*float(i+1)/8.+.5);
         vec2 point = (uv - center) * vec2(iResolution.x/iResolution.y, 1.0);
         float bright = 2./(pow(length(point*(15.+7.*sin(3.*iTime/7.))),2.)+1.);
-        vec3[3] qtmp=vec3[3](sinTriad(iTime+distance(uv,point)),sinTriad(iTime+distance(uv,point)),sinTriad(iTime+distance(uv,point)));
+        vec3[3] qtmp=vec3[3](
+            sinTriad(iTime+distance(uv,center)*81.),
+            sinTriad(iTime+distance(uv,center)*81.),
+            sinTriad(iTime+distance(uv,center)*81.)
+        );
         q[0] += qtmp[0]*bright;
         q[1] += qtmp[1]*bright;
         q[2] += qtmp[2]*bright;
