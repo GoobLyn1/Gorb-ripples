@@ -9,7 +9,10 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
     for (int i = 0; i < 2; i++) {
         vec3 wl=vec3(512./430., 512./555., 512./660.);
-        vec2 centerO = vec2(0.5 + 0.2 * sin(iTime*float(i+1)), cos(iTime*float(i+1))/8.+.5);
+        vec2 centerO = vec2(
+            0.5 + 0.2 * sin(iTime*float(i+1)*randBases[8*i]),
+            0.5 + cos(iTime*float(i+1))/8.randBases
+        );
         float time = iTime-iTimeDelta*distance(uv,centerO)*64.;
         vec2 center = vec2(
             0.5 + 0.2 * sin(time*float(i+1)), 
