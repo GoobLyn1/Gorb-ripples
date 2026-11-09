@@ -1,0 +1,24 @@
+{
+  "ver": "0.1",
+  "info": {
+    "id": "",
+    "name": "",
+    "description": "",
+    "tags": []
+  },
+  "renderpass": [
+    {
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "4dfGRr",
+          "channel": 0
+        }
+      ],
+      "code": "vec3 sinTriad(float inp){\n    return vec3(sin(inp),sin(inp+radians(120.)),sin(inp+radians(240.)));\n}\nvoid mainImage(out vec4 fragColor, in vec2 fragCoord) {\n    vec2 uv = fragCoord / iResolution.xy;\n    fragColor = vec4(sin(uv+iTime), 0.75, 1.0);\n}",
+      "name": "Image",
+      "description": "",
+      "type": "image"
+    }
+  ]
+}
