@@ -7,15 +7,15 @@ vec3 sinTriad(float inp){
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3[3] q=vec3[3](vec3(0.),vec3(0.),vec3(0.));
     vec2 uv = fragCoord / iResolution.xy;
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 13; i++) {
         vec3 wl=vec3(
             512./(430.+randBases[8*i+2]-.5), 
             512./(555.+randBases[8*i+3]-.5), 
             512./(660.+randBases[8*i+4]-.5)
             );
         vec2 c0freq = vec2(
-            (pow(float(i+1),.5)*randBases[8*i]),
-            (pow(float(i+1),.5)*randBases[8+i+1])
+            (pow(float(i+1),.25)*randBases[8*i]),
+            (pow(float(i+1),.25)*randBases[8+i+1])
         );
         vec2 centerO = vec2(
             0.5 + 0.4 * sin(iTime*c0freq.x+sin(iTime*randBases[8*i+5]*2.)/3.),
@@ -23,8 +23,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         );
         float time = iTime-iTimeDelta*distance(uv,centerO)*64.;
         vec2 cfreq = vec2(
-            (pow(float(i+1),.5)*randBases[8*i]),
-            (pow(float(i+1),.5)*randBases[8+i+1])
+            (pow(float(i+1),.25)*randBases[8*i]),
+            (pow(float(i+1),.25)*randBases[8+i+1])
         );
         vec2 center = vec2(
             0.5 + 0.4 * sin(time*cfreq.x+sin(time*randBases[8*i+5]*2.)/3.), 
@@ -37,9 +37,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             sinTriad((time*wl.y+distance(uv,center)*64.*wl.y*wl.y*wl.y*wl.y)),
             sinTriad((time*wl.z+distance(uv,center)*64.*wl.z*wl.z*wl.z*wl.z))
         );
-        q[0] += qtmp[0]*bright*(.75+sin(2.*wl.x*time*randBases[3*i])/4.);
-        q[1] += qtmp[1]*bright*(.75+sin(3.*wl.y*time*randBases[3*i+1])/4.);
-        q[2] += qtmp[2]*bright*(.75+sin(5.*wl.z*time*randBases[3*i+2])/4.);
+        q[0] += qtmp[0]*bright*(.75+sin(7.*wl.x*time*randBases[3*i])/4.);
+        q[1] += qtmp[1]*bright*(.75+sin(7.*wl.y*time*randBases[3*i+1])/4.);
+        q[2] += qtmp[2]*bright*(.75+sin(7.*wl.z*time*randBases[3*i+2])/4.);
     }
     
     fragColor = vec4(vec3(length(q[0]),length(q[1]),length(q[2])), 1.0);
