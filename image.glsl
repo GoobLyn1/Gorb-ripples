@@ -5,16 +5,13 @@ vec3 sinTriad(float inp){
 //vec2 point = (uv - center) * vec2(iResolution.x/iResolution.y, 1.0);
 //float bright = 2./(pow(length(point*(15.+7.*sin(3.*iTime/7.))),2.)+1.);
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
-    vec3[256] q=vec3[16](
-        vec3(0.),vec3(0.),vec3(0.),vec3(0.),
-        vec3(0.),vec3(0.),vec3(0.),vec3(0.),
-        vec3(0.),vec3(0.),vec3(0.),vec3(0.),
-        vec3(0.),vec3(0.),vec3(0.),vec3(0.)
-    );
+    vec3[3] q=vec3[3](vec3(0.),vec3(0.),vec3(0.));
     vec2 uv = fragCoord / iResolution.xy;
     vec2 center = vec2(0.5 + 0.2 * sin(iTime), cos(iTime)/8.+.5);
     for (int i = 0; i < 16; i++) {
-
+        vec2 point = (uv - center) * vec2(iResolution.x/iResolution.y, 1.0);
+        float bright = 2./(pow(length(point*(15.+7.*sin(3.*iTime/7.))),2.)+1.);
+        vec3[3] qtmp=vec3[3](sinTriad(iTime+distance(uv,point)),sinTriad(iTime+distance(uv,point)),sinTriad(iTime+distance(uv,point)));
     }
     fragColor = vec4(sin(uv+iTime), .3, 1.0);
 }
