@@ -7,11 +7,11 @@ vec3 sinTriad(float inp){
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3[3] q=vec3[3](vec3(0.),vec3(0.),vec3(0.));
     vec2 uv = fragCoord / iResolution.xy;
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 2; i++) {
         vec3 wl=vec3(
-            512./(430.+randBases[8*i+2]), 
-            512./(555.+randBases[8*i+3]), 
-            512./(660.+randBases[8*i+4])
+            512./(430.+randBases[8*i+2]-.5), 
+            512./(555.+randBases[8*i+3]-.5), 
+            512./(660.+randBases[8*i+4]-.5)
             );
         vec2 centerO = vec2(
             0.5 + 0.2 * sin(iTime*float(i+1)*randBases[8*i]),
