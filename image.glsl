@@ -11,7 +11,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
         vec3 wl=vec3(512./430., 512./555., 512./660.);
         vec2 centerO = vec2(
             0.5 + 0.2 * sin(iTime*float(i+1)*randBases[8*i]),
-            0.5 + cos(iTime*float(i+1))/8.randBases
+            0.5 +       cos(iTime*float(i+1)*randBases[8+i+1])/8.
         );
         float time = iTime-iTimeDelta*distance(uv,centerO)*64.;
         vec2 center = vec2(
