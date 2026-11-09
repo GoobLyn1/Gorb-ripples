@@ -7,7 +7,7 @@ vec3 sinTriad(float inp){
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3[3] q=vec3[3](vec3(0.),vec3(0.),vec3(0.));
     vec2 uv = fragCoord / iResolution.xy;
-    for (int i = 0; i < 13; i++) {
+    for (int i = 0; i < 1; i++) {
         vec3 wl=vec3(
             512./(430.+randBases[8*i+2]-.5), 
             512./(555.+randBases[8*i+3]-.5), 
@@ -18,8 +18,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             (pow(float(i+1),.25)*randBases[8+i+1])
         );
         vec2 centerO = vec2(
-            0.5 + 0.4 * sin(iTime*c0freq.x+sin(iTime*randBases[8*i+5]*2.)/3.),
-            0.5 +       cos(iTime*c0freq.y+sin(iTime*randBases[8*i+6]*3.)/3.)/4.
+            0.5 + 0.4 * sin(iTime*c0freq.x+3.*sin(iTime*randBases[8*i+5]*2.)/3.),
+            0.5 +       cos(iTime*c0freq.y+3.*sin(iTime*randBases[8*i+6]*3.)/3.)/4.
         );
         float time = iTime-iTimeDelta*distance(uv,centerO)*64.;
         vec2 cfreq = vec2(
@@ -27,8 +27,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             (pow(float(i+1),.25)*randBases[8+i+1])
         );
         vec2 center = vec2(
-            0.5 + 0.4 * sin(time*cfreq.x+sin(time*randBases[8*i+5]*2.)/3.), 
-            0.5 +       cos(time*cfreq.y+sin(time*randBases[8*i+5]*2.)/3.)/4.
+            0.5 + 0.4 * sin(time*cfreq.x+3.*sin(time*randBases[8*i+5]*2.)/3.), 
+            0.5 +       cos(time*cfreq.y+3.*sin(time*randBases[8*i+5]*2.)/3.)/4.
         );
         vec2 point = (uv - center) * vec2(iResolution.x/iResolution.y, 1.0);
         float bright = 2./(pow(length(point*(20.+7.*sin(3.*iTime/7.*randBases[8*i+7]))),2.)+1.);
