@@ -31,15 +31,15 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             0.5 +       cos(time*cfreq.y+sin(time*randBases[8*i+5]*2.)/3.)/4.
         );
         vec2 point = (uv - center) * vec2(iResolution.x/iResolution.y, 1.0);
-        float bright = 2./(pow(length(point*(15.+7.*sin(3.*iTime/7.))),2.)+1.);
+        float bright = 2./(pow(length(point*(20.+7.*sin(3.*iTime/7.*randBases[8*i+7]))),2.)+1.);
         vec3[3] qtmp=vec3[3](
             sinTriad((time*wl.x+distance(uv,center)*64.*wl.x*wl.x*wl.x*wl.x)),
             sinTriad((time*wl.y+distance(uv,center)*64.*wl.y*wl.y*wl.y*wl.y)),
             sinTriad((time*wl.z+distance(uv,center)*64.*wl.z*wl.z*wl.z*wl.z))
         );
-        q[0] += qtmp[0]*bright;
-        q[1] += qtmp[1]*bright;
-        q[2] += qtmp[2]*bright;
+        q[0] += qtmp[0]*bright+sin(wl.x*iTime)/8.;
+        q[1] += qtmp[1]*bright+sin(wl.y*iTime)/8.;
+        q[2] += qtmp[2]*bright+sin(wl.z*iTime)/8.;
     }
     
     fragColor = vec4(vec3(length(q[0]),length(q[1]),length(q[2])), 1.0);
