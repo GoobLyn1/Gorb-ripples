@@ -7,7 +7,7 @@ vec3 sinTriad(float inp){
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3[3] q=vec3[3](vec3(0.),vec3(0.),vec3(0.));
     vec2 uv = fragCoord / iResolution.xy;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
         vec3 wl=vec3(
             512./(430.+randBases[8*i+2]-.5), 
             512./(555.+randBases[8*i+3]-.5), 
@@ -37,9 +37,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             sinTriad((time*wl.y+distance(uv,center)*64.*wl.y*wl.y*wl.y*wl.y)),
             sinTriad((time*wl.z+distance(uv,center)*64.*wl.z*wl.z*wl.z*wl.z))
         );
-        q[0] += qtmp[0]*bright+sin(wl.x*iTime)/8.;
-        q[1] += qtmp[1]*bright+sin(wl.y*iTime)/8.;
-        q[2] += qtmp[2]*bright+sin(wl.z*iTime)/8.;
+        q[0] += qtmp[0]*bright*(.75+sin(wl.x*time)/4.);
+        q[1] += qtmp[1]*bright*(.75+sin(wl.y*time)/4.);
+        q[2] += qtmp[2]*bright*(.75+sin(wl.z*time)/4.);
     }
     
     fragColor = vec4(vec3(length(q[0]),length(q[1]),length(q[2])), 1.0);
