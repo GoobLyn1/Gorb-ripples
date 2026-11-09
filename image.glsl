@@ -18,8 +18,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             (float(i+1)*randBases[8+i+1])
         );
         vec2 centerO = vec2(
-            0.5 + 0.2 * sin(iTime*c0freq.x),
-            0.5 +       cos(iTime*c0freq.y)/8.
+            0.5 + 0.2 * sin(iTime*c0freq.x+sin(iTime*randBases[8*i+5]*2.)/3.),
+            0.5 +       cos(iTime*c0freq.y+sin(iTime*randBases[8*i+6]*3.)/3.)/8.
         );
         float time = iTime-iTimeDelta*distance(uv,centerO)*64.;
         vec2 cfreq = vec2(
@@ -27,8 +27,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             (float(i+1)*randBases[8+i+1])
         );
         vec2 center = vec2(
-            0.5 + 0.2 * sin(time*cfreq.x), 
-            0.5 +       cos(time*cfreq.y)/8.
+            0.5 + 0.2 * sin(time*cfreq.x+sin(iTime*randBases[8*i+5]*2.)/3.), 
+            0.5 +       cos(time*cfreq.y+sin(iTime*randBases[8*i+5]*2.)/3.)/8.
         );
         vec2 point = (uv - center) * vec2(iResolution.x/iResolution.y, 1.0);
         float bright = 2./(pow(length(point*(15.+7.*sin(3.*iTime/7.))),2.)+1.);
