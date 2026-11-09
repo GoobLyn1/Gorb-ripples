@@ -2,8 +2,8 @@
   "ver": "0.1",
   "info": {
     "id": "",
-    "name": "",
-    "description": "",
+    "name": "Gorb ripples",
+    "description": "This shader shows gorb supremacy",
     "tags": []
   },
   "renderpass": [
